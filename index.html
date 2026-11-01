@@ -6,10 +6,10 @@
 </head>
 <body>
 <script>
-// ===== إعدادات Supabase: الصقي هنا الرابط والمفتاح من لوحة Supabase =====
+// إعدادات Supabase (الرابط والمفتاح العام)
 window.MEMORIES_CONFIG = {
-  url: "",   // مثال: https://abcdxyz.supabase.co
-  key: ""    // المفتاح العام (anon / publishable)
+  url: "https://kznbdokqihbumjsjexvr.supabase.co",
+  key: "sb_publishable_tWOldbv5Gof5VfQC-v47pw_C6lu6cDA"
 };
 </script>
 <title>ذكريات ٢٠٢٧</title>
@@ -728,7 +728,7 @@ button, input, textarea { font: inherit; color: inherit; }
     }
     function req(path, opts, retried) {
       opts = opts || {};
-      var headers = Object.assign({ apikey: key, Authorization: 'Bearer ' + (sess ? sess.access_token : key) }, opts.headers || {});
+      var headers = Object.assign({ apikey: key }, sess ? { Authorization: 'Bearer ' + sess.access_token } : {}, opts.headers || {});
       return fetch(base + path, Object.assign({}, opts, { headers: headers })).then(function (r) {
         if (r.status === 401 && sess && !retried) {
           return refreshSession().then(function () { return req(path, opts, true); }, function () { return req(path, opts, true); });
